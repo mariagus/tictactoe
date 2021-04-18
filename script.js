@@ -63,10 +63,9 @@ function gameInit() {
         showWinner(announceWinner);
         gameLive = false;
         newGameButton();
-      } else if (!winner && !gameState.includes("")) {
-        let draw = "It's a DRAW!";
-        document.querySelector(".modal").style.display = "block";
-        document.querySelector(".winnerMessage").textContent = draw;
+      } else if (!gameState.includes("")) {
+        winner = "It's a DRAW!";
+        showWinner(winner);
         gameLive = false;
         newGameButton();
       }
@@ -90,11 +89,11 @@ function gameInit() {
       const newGameButton = document.querySelector("#newGame");
       newGameButton.innerHTML = `<button id="btn">NEW GAME</button>`;
       newGameButton.addEventListener("click", () => {
-        displayPlayer(currentPlayer);
-        gameLive = true;
         resetGameState();
         let btn = document.querySelector("#btn");
-        newGameButton.removeChild(btn);
+        if (btn) {
+          newGameButton.removeChild(btn);
+        }
       });
     }
   }
@@ -116,7 +115,6 @@ function gameInit() {
   }
 
   function decideComputerMove() {
-    // return the index of the game for computer to check
     let index = gameState.findIndex((val) => !val);
     let winCombinations = [
       [0, 1, 2],
@@ -152,7 +150,9 @@ function gameInit() {
   }
 
   function resetGameState() {
+    gameLive = true;
     currentPlayer = "X";
+    displayPlayer(currentPlayer);
     gameState = ["", "", "", "", "", "", "", "", ""];
     document
       .querySelectorAll(".cell")
