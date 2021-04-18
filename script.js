@@ -100,20 +100,51 @@ function gameInit() {
   }
   function computersTurn() {
     if (currentPlayer === "O" && gameLive) {
-      let cells = [];
+      let index = decideComputerMove();
+
       document.querySelectorAll(".cell").forEach((cell) => {
-        if (!cell.textContent) {
-          cells.push(cell);
+        if (cell.dataset.index == index) {
+          cell.textContent = currentPlayer;
+          gameState[index] = currentPlayer;
         }
       });
-      let randomCell = randomIndex(cells);
-      let cellIndex = randomCell.dataset.index;
-      gameState[cellIndex] = currentPlayer;
-      randomCell.textContent = currentPlayer;
+
       calculateWinner();
       switchPlayer();
       displayPlayer();
     }
+  }
+
+  function decideComputerMove() {
+    // return the index of the game for computer to check
+    let index = gameState.findIndex((val) => !val);
+    let winCombinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    winCombinations.forEach((subArr) => {
+      let a = subArr[0];
+      let b = subArr[1];
+      let c = subArr[2];
+
+      if (gameState[a] === "X" && gameState[b] === "X" && gameState[c] === "") {
+        index = c;
+      }
+      if (gameState[a] === "X" && gameState[b] === "" && gameState[c] === "X") {
+        index = b;
+      }
+      if (gameState[a] === "" && gameState[b] === "X" && gameState[c] === "X") {
+        index = a;
+      }
+    });
+    return index;
   }
 
   function randomIndex(items) {
