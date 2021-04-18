@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nerko+One&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: rgb(112, 189, 157);
+  font-family: "Nerko One", cursive;
+  color: rgb(72, 46, 97);
+}
+
+h1 {
+  font-size: 5rem;
+  text-align: center;
+  margin: 10px;
+}
+
+#btn,
+#startGame {
+  background-color: white;
+  color: rgb(72, 46, 97);
+  padding: 0.8rem;
+  margin: 20px;
+  border: 3px solid rgb(72, 46, 97);
+  font-family: "Nerko One", cursive;
+  font-size: 1.5rem;
+}
+
+#btn:hover,
+#startGame:hover {
+  color: white;
+  background-color: rgb(72, 46, 97);
+}
+
+#currentPlayer {
+  height: 30px;
+  margin: 2rem;
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  background-color: rgb(72, 46, 97);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.cell {
+  font-family: "Gaegu", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  width: 100px;
+  height: 100px;
+  border: 1px solid white;
+  color: white;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.521); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  font-size: 3rem;
+  text-align: center;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border: 2px solid rgb(72, 46, 97);
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+  .cell {
+    width: 150px;
+    height: 150px;
+    font-size: 8rem;
+  }
+}
