@@ -81,11 +81,11 @@ body {
 
 /* Modal Content */
 .modal-content {
+  position: relative;
   font-size: 3rem;
   text-align: center;
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
   border: 1px solid #888;
   width: 50%;
   border: 2px solid rgb(72, 46, 97);
@@ -93,8 +93,9 @@ body {
 
 /* The Close Button */
 .close {
+  position: absolute;
+  right: 20px;
   color: #aaaaaa;
-  float: right;
   font-size: 3rem;
   font-weight: bold;
 }
