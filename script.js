@@ -25,7 +25,9 @@ function gameInit() {
       switchPlayer();
       displayPlayer(currentPlayer);
     }
-    setTimeout(computersTurn, 1500);
+    if (gameState.includes("")) {
+      setTimeout(computersTurn, 1000);
+    }
   }
 
   function switchPlayer() {
@@ -97,28 +99,29 @@ function gameInit() {
     }
   }
   function computersTurn() {
-    if (currentPlayer === "O") {
+    if (currentPlayer === "O" && gameLive) {
       let cellToClick;
+      let clickedIndex;
       document.querySelectorAll(".cell").forEach((cell) => {
         if (!cell.textContent) {
           cellToClick = cell;
+          clickedIndex = cell.dataset.index;
           return cellToClick;
         }
       });
-      cellToClick.click();
+      cellToClick.textContent = currentPlayer;
+      gameState[clickedIndex] = currentPlayer;
+      calculateWinner();
+      switchPlayer();
     }
   }
 
-  function randomIndex(items) {
-    return items[Math.floor(Math.random() * items.length)];
-  }
-
   function resetGameState() {
+    currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
     document
       .querySelectorAll(".cell")
-      .forEach((value) => (value.textContent = ""));
-    document.querySelector("h2").textContent = "";
+      .forEach((cell) => (cell.textContent = ""));
   }
 
   document
@@ -132,9 +135,3 @@ startGame.addEventListener("click", () => {
   gameInit();
   startGame.style.display = "none";
 });
-
-//computer takes turn
-// nodelist of all querySelectorAll('.cell')
-// if cell.value empty, add 'O'
-// get the data-index
-// add to gameState[data-index]
