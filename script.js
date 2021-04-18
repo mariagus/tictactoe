@@ -5,26 +5,29 @@ function gameInit() {
 
   displayPlayer(currentPlayer, gameLive);
 
-  function displayPlayer(player) {
+  function displayPlayer() {
     let showPlayer = document.querySelector("#currentPlayer");
 
-    if (player === "X") {
+    if (currentPlayer === "X") {
       showPlayer.textContent = "PLAYER 1's TURN!";
     } else {
-      showPlayer.textContent = "PLAYER 2'S TURN!";
+      showPlayer.textContent = "COMPUTER'S TURN!";
     }
   }
 
   function handleClickedCell(event) {
-    let cell = event.target;
-    let index = cell.dataset.index;
-    if (gameState[index] === "" && gameLive) {
-      gameState[index] = currentPlayer;
-      cell.textContent = currentPlayer;
-      calculateWinner();
-      switchPlayer();
-      displayPlayer(currentPlayer);
+    if (currentPlayer === "X") {
+      let cell = event.target;
+      let index = cell.dataset.index;
+      if (gameState[index] === "" && gameLive) {
+        gameState[index] = currentPlayer;
+        cell.textContent = currentPlayer;
+        calculateWinner();
+        switchPlayer();
+        displayPlayer();
+      }
     }
+    setTimeout(computersTurn, 500);
   }
 
   function switchPlayer() {
@@ -95,13 +98,34 @@ function gameInit() {
       });
     }
   }
+  function computersTurn() {
+    if (currentPlayer === "O" && gameLive) {
+      let cells = [];
+      document.querySelectorAll(".cell").forEach((cell) => {
+        if (!cell.textContent) {
+          cells.push(cell);
+        }
+      });
+      let randomCell = randomIndex(cells);
+      let cellIndex = randomCell.dataset.index;
+      gameState[cellIndex] = currentPlayer;
+      randomCell.textContent = currentPlayer;
+      calculateWinner();
+      switchPlayer();
+      displayPlayer();
+    }
+  }
+
+  function randomIndex(items) {
+    return items[Math.floor(Math.random() * items.length)];
+  }
 
   function resetGameState() {
+    currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
     document
       .querySelectorAll(".cell")
-      .forEach((value) => (value.textContent = ""));
-    document.querySelector("h2").textContent = "";
+      .forEach((cell) => (cell.textContent = ""));
   }
 
   document
