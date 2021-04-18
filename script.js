@@ -11,7 +11,7 @@ function gameInit() {
     if (player === "X") {
       showPlayer.textContent = "PLAYER 1's TURN!";
     } else {
-      showPlayer.textContent = "PLAYER 2'S TURN!";
+      showPlayer.textContent = "COMPUTER'S TURN!";
     }
   }
 
