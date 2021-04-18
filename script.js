@@ -16,14 +16,16 @@ function gameInit() {
   }
 
   function handleClickedCell(event) {
-    let cell = event.target;
-    let index = cell.dataset.index;
-    if (gameState[index] === "" && gameLive) {
-      gameState[index] = currentPlayer;
-      cell.textContent = currentPlayer;
-      calculateWinner();
-      switchPlayer();
-      displayPlayer(currentPlayer);
+    if (currentPlayer === "X") {
+      let cell = event.target;
+      let index = cell.dataset.index;
+      if (gameState[index] === "" && gameLive) {
+        gameState[index] = currentPlayer;
+        cell.textContent = currentPlayer;
+        calculateWinner();
+        switchPlayer();
+        displayPlayer(currentPlayer);
+      }
     }
     if (gameState.includes("")) {
       setTimeout(computersTurn, 1000);
