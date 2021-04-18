@@ -25,6 +25,7 @@ function gameInit() {
       switchPlayer();
       displayPlayer(currentPlayer);
     }
+    setTimeout(computersTurn, 1500);
   }
 
   function switchPlayer() {
@@ -94,6 +95,22 @@ function gameInit() {
         newGameButton.removeChild(btn);
       });
     }
+  }
+  function computersTurn() {
+    if (currentPlayer === "O") {
+      let cellToClick;
+      document.querySelectorAll(".cell").forEach((cell) => {
+        if (!cell.textContent) {
+          cellToClick = cell;
+          return cellToClick;
+        }
+      });
+      cellToClick.click();
+    }
+  }
+
+  function randomIndex(items) {
+    return items[Math.floor(Math.random() * items.length)];
   }
 
   function resetGameState() {
