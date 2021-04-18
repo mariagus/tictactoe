@@ -115,3 +115,9 @@ startGame.addEventListener("click", () => {
   gameInit();
   startGame.style.display = "none";
 });
+
+//computer takes turn
+// nodelist of all querySelectorAll('.cell')
+// if cell.value empty, add 'O'
+// get the data-index
+// add to gameState[data-index]
