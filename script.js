@@ -27,9 +27,7 @@ function gameInit() {
         displayPlayer();
       }
     }
-    if (gameState.includes("")) {
-      setTimeout(computersTurn, 1000);
-    }
+    setTimeout(computersTurn, 500);
   }
 
   function switchPlayer() {
