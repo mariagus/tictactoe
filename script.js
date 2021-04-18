@@ -5,10 +5,10 @@ function gameInit() {
 
   displayPlayer(currentPlayer, gameLive);
 
-  function displayPlayer(player) {
+  function displayPlayer() {
     let showPlayer = document.querySelector("#currentPlayer");
 
-    if (player === "X") {
+    if (currentPlayer === "X") {
       showPlayer.textContent = "PLAYER 1's TURN!";
     } else {
       showPlayer.textContent = "COMPUTER'S TURN!";
@@ -24,7 +24,7 @@ function gameInit() {
         cell.textContent = currentPlayer;
         calculateWinner();
         switchPlayer();
-        displayPlayer(currentPlayer);
+        displayPlayer();
       }
     }
     if (gameState.includes("")) {
@@ -102,20 +102,24 @@ function gameInit() {
   }
   function computersTurn() {
     if (currentPlayer === "O" && gameLive) {
-      let cellToClick;
-      let clickedIndex;
+      let cells = [];
       document.querySelectorAll(".cell").forEach((cell) => {
         if (!cell.textContent) {
-          cellToClick = cell;
-          clickedIndex = cell.dataset.index;
-          return cellToClick;
+          cells.push(cell);
         }
       });
-      cellToClick.textContent = currentPlayer;
-      gameState[clickedIndex] = currentPlayer;
+      let randomCell = randomIndex(cells);
+      let cellIndex = randomCell.dataset.index;
+      gameState[cellIndex] = currentPlayer;
+      randomCell.textContent = currentPlayer;
       calculateWinner();
       switchPlayer();
+      displayPlayer();
     }
+  }
+
+  function randomIndex(items) {
+    return items[Math.floor(Math.random() * items.length)];
   }
 
   function resetGameState() {
